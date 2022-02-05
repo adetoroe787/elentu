@@ -18,7 +18,7 @@ import itertools
 
 
 def index(request):
-	return render(request, 'core/index.html')
+	return render(request, 'main/index.html')
 
 
 def verifyInput(username,password):
@@ -46,7 +46,7 @@ def registerUser(request):
 		if len(error) != 0:
 			error = error[0]
 			print(error)
-			return render(request, 'core/registration_form.html', {'error': error})
+			return render(request, 'main/registration_form.html', {'error': error})
 		else:
 			a = User(username=username, email=email, password=hashed_password)
 			a.save()
@@ -58,7 +58,7 @@ def registerUser(request):
 			messages.success(request, 'Account Was Created Successfully')
 			return redirect('register')
 	else:
-		return render(request, 'core/registration_form.html')
+		return render(request, 'main/registration_form.html')
 
 
 
@@ -74,13 +74,13 @@ def index(request):
 			messages.info(request, 'Invalid Username or Password')
 			return redirect('index')
 	else:
-		return render(request, 'core/index.html')
+		return render(request, 'main/index.html')
 
 
 
 def dashboard(request):
 	print(request.user)
-	return render(request, 'core/dashboard.html')
+	return render(request, 'main/dashboard.html')
 
 
 def feed(request):
@@ -99,7 +99,7 @@ def feed(request):
 	'username': username,
 	}
 
-	return render(request, 'core/feed.html', context)
+	return render(request, 'main/feed.html', context)
 
 
 
@@ -162,7 +162,7 @@ def commentweb(request, username, post_id):
 
 
 def search(request):
-    template='core/search.html'
+    template='main/search.html'
 
     query = request.GET['q']
     print(query)
@@ -270,7 +270,7 @@ def profile(request, username):
 		comment_form = CreateComment()
 		context.update({'comment_form':comment_form})
 
-	return render(request, 'core/profile.html', context)
+	return render(request, 'main/profile.html', context)
 
 
 
